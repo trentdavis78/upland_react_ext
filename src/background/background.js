@@ -129,3 +129,9 @@ async function retryOnTabUpdate(tabId, info, tab) {
     keepAlive()
   }
 }
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type == 'SIGN_TX_SUBDIVIDE') console.log('SUBDIVIDE')
+
+  sendResponse()
+})
