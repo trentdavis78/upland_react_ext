@@ -64,6 +64,14 @@ const OptionsPage = (props) => {
         props.ual.authenticators[0].users.length > 0 ||
         props.ual.authenticators[1].users.length > 0
       ) {
+
+        let wax
+        if(props.ual.authenticators[0].users.length > 0){
+          wax = props.ual.authenticators[0].users[0].accountName
+        }else if(props.ual.authenticators[1].users.length > 0){
+          wax = props.ual.authenticators[1].users[0].accountName
+        }
+        localStorage.setItem('wax_id', wax)
         callback()
         clearInterval(intervalID)
       }

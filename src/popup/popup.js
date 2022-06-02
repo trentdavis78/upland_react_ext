@@ -41,6 +41,8 @@ const App = (props) => {
     ual: { activeUser, activeAuthenticator, logout, loading },
   } = props
 
+
+
   const [backdropOpen, setBackdropOpen] = React.useState(false)
   const handleBackdropClose = () => {
     setBackdropOpen(false)
