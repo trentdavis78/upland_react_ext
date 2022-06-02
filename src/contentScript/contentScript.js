@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       fetchData(request.url).then((data) => {
         console.log(` your property data: ${JSON.stringify(data)}`)
         currOwner = data?.owner
-        currPropModelID = data?.building?.propModelID
+        currPropModelID = data?.building?.nftID
         currFullAddress = data?.full_address + ', ' + data?.city?.name
         currCityID = data?.city?.id
         currSparkHrs = data?.building?.details?.maxStackedSparks
