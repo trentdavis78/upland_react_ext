@@ -53,6 +53,22 @@ const OptionsPage = (props) => {
   const {
     ual: { activeUser, activeAuthenticator, logout, loading },
   } = props
+  function handleWaxLogin(callback) {
+    props.ual.showModal()
+
+    let i = 0
+    const intervalID = setInterval(() => {
+      console.log(i++)
+
+      if (
+        props.ual.authenticators[0].users.length > 0 ||
+        props.ual.authenticators[1].users.length > 0
+      ) {
+        callback()
+        clearInterval(intervalID)
+      }
+    }, 1000)
+  }
 
   return (
     <div
@@ -88,7 +104,11 @@ const OptionsPage = (props) => {
               </Button>
             ) : (
               <Button
-                onClick={() => props.ual.showModal()}
+                onClick={() =>
+                  handleWaxLogin(function callFunction() {
+                    window.close()
+                  })
+                }
                 variant="contained"
                 color="secondary"
                 startIcon={<Avatar src={'assets/wax.svg'} />}

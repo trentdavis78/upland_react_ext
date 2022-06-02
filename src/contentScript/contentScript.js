@@ -5,11 +5,24 @@ import { showManageButtons } from './helpers/showManageButtons'
 let currPropID
 let currOwner
 let currPropModelID
+let currFullAddress
+let currCityID
+let currSparkHrs
 const myID = sessionStorage.getItem('eos_id')
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === 'PROPERTY_MODEL') {
+    switch (currCityID) {
+      case 1:
+        currFullAddress += ' , CA'
+        break
+      case 3:
+        currFullAddress += ' , NY'
+        break
+      default:
+        break
+    }
     sendResponse(`${request.message} was received`)
-    showManageButtons(currOwner, currPropModelID)
+    showManageButtons(currOwner, currPropModelID, currFullAddress, currSparkHrs)
   }
 
   if (request.message === 'API_PROPERTIES') {
@@ -23,6 +36,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         console.log(` your property data: ${JSON.stringify(data)}`)
         currOwner = data?.owner
         currPropModelID = data?.building?.propModelID
+        currFullAddress = data?.full_address + ', ' + data?.city?.name
+        currCityID = data?.city?.id
+        currSparkHrs = data?.building?.details?.maxStackedSparks
 
         if (myID !== currOwner) {
           showManageButtons(currOwner, currPropModelID)

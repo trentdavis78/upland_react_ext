@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom/client'
 import Modal from '../components/Modal'
 import { manageModal, manageButton } from './htmlFiles'
 import { checkSubDivide } from '../../utils/api'
-export const showManageButtons = (currOwner, currPropModelID) => {
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
+export const showManageButtons = (
+  currOwner,
+  currPropModelID,
+  currFullAddress,
+  currSparkHrs
+) => {
   const myEOSID = sessionStorage.getItem('eos_id')
 
   if (currOwner === myEOSID) {
@@ -50,6 +58,51 @@ export const showManageButtons = (currOwner, currPropModelID) => {
         cursor: !canBeDivided ? 'pointer' : 'not-allowed',
       }
 
+      const signTX = () => {
+        chrome.runtime.sendMessage({
+          type: 'SIGN_TX_SUBDIVIDE',
+          options: {
+            type: 'basic',
+            title: 'Test',
+            message: 'Test',
+          },
+        })
+      }
+
+      const FurnishModalText = () => {
+        return <>Nada</>
+      }
+      const SubDivideModalText = () => {
+        return (
+          <>
+            <Typography variant="body1" gutterBottom>
+              You are about to divide your property
+            </Typography>
+            <Typography
+              style={{ color: '#005cff' }}
+              variant="body1"
+              gutterBottom
+            >
+              <b>{currFullAddress}</b>
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Into{' '}
+              <Typography
+                style={{ color: '#005cff' }}
+                variant="span"
+                gutterBottom
+              >
+                <b>
+                  {currSparkHrs == 30 ? '8 ' : currSparkHrs == 20 ? '3 ' : '1 '}
+                  - 1 BR
+                </b>
+              </Typography>
+              units
+            </Typography>
+          </>
+        )
+      }
+
       return (
         <>
           <button
@@ -66,7 +119,18 @@ export const showManageButtons = (currOwner, currPropModelID) => {
           >
             {buttonAttrbs.alt}
           </button>
-          <Modal open={open} handleClose={handleClose} />
+          <Modal
+            title={buttonAttrbs.alt}
+            open={open}
+            handleClose={handleClose}
+            signTX={signTX}
+          >
+            {buttonAttrbs.alt == 'Furnish' ? (
+              <FurnishModalText />
+            ) : (
+              <SubDivideModalText />
+            )}
+          </Modal>
         </>
       )
     }
@@ -125,7 +189,7 @@ export const showManageButtons = (currOwner, currPropModelID) => {
       })
     })
   } else {
-    const addManageModal = () => {
+    const addManageModal = (e) => {
       const newDiv = document.createElement('div')
       newDiv.setAttribute('style', 'z-index: 9999; position: relative')
       newDiv.innerHTML = manageModal
@@ -141,7 +205,7 @@ export const showManageButtons = (currOwner, currPropModelID) => {
     const newDiv = document.createElement('div')
     newDiv.setAttribute('style', ' margin-left:35px')
     newDiv.addEventListener('click', function handleClick(event) {
-      addManageModal()
+      addManageModal(event)
     })
     newDiv.innerHTML = manageButton
     closeFooter[0].appendChild(newDiv)

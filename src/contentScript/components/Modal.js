@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
-export default function Modal({ open, handleClose }) {
+export default function Modal({ open, handleClose, title, children, signTX }) {
   return (
     <div>
       <Dialog
@@ -15,18 +15,27 @@ export default function Modal({ open, handleClose }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Hi! I'm the omnipotent popup window!"}
+        <DialogTitle
+          id="alert-dialog-title"
+          style={{
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
+          {title}
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            We think you should go fuck yourself. Do you agree?
-          </DialogContentText>
-        </DialogContent>
+        <DialogContent>{children}</DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              handleClose()
+              signTX()
+            }}
+            autoFocus
+          >
+            Ok
           </Button>
         </DialogActions>
       </Dialog>
