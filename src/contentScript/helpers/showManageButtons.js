@@ -81,7 +81,16 @@ export const showManageButtons = (
       }
 
       const FurnishModalText = () => {
-        return <>Nada</>
+        return (
+          <>
+            <Typography variant="body1" gutterBottom>
+              Select the room you would like to furnish.
+            </Typography>
+            <Typography variant="h3" gutterBottom>
+              PLACEHOLDER FOR ROOM SCHEMATIC
+            </Typography>
+          </>
+        )
       }
       const SubDivideModalText = () => {
         return (

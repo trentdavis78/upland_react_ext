@@ -18,6 +18,8 @@ import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import BackdropComponent from './components/BackdropComponent'
+import Subdivide from './components/Subdivide'
+import Furnish from './components/Furnish'
 
 const theme = createTheme({
   components: {
@@ -41,7 +43,9 @@ const App = (props) => {
     ual: { activeUser, activeAuthenticator, logout, loading },
   } = props
 
-  const [backdropOpen, setBackdropOpen] = React.useState(false)
+  const [backdropOpen, setBackdropOpen] = useState(false)
+  const [pageContext, setPageContext] = useState('home')
+
   const handleBackdropClose = () => {
     setBackdropOpen(false)
   }
@@ -53,6 +57,15 @@ const App = (props) => {
     setTimeout(() => {
       setIsLoading(false)
     }, 500)
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      console.log(tabs[0])
+    })
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    let value = params.value
+    setPageContext(value)
   }, [loading])
 
   const openOptions = () => {
@@ -70,6 +83,10 @@ const App = (props) => {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }))
+
+  const Home = () => {
+    return <h1>HOME PAGE</h1>
+  }
 
   return (
     <div
@@ -95,6 +112,21 @@ const App = (props) => {
                   <Grid item xs={8}></Grid>
                   <Grid item xs={4}>
                     <AvatarChip username={activeUser.accountName} />
+                  </Grid>
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{ width: 300, margin: 'auto' }}
+                  >
+                    {pageContext === 'home' ? (
+                      <Home />
+                    ) : pageContext === 'subdivide' ? (
+                      <Subdivide />
+                    ) : (
+                      <Furnish />
+                    )}
                   </Grid>
                 </Grid>
               </Box>
