@@ -136,7 +136,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     chrome.windows.create(
       {
         focused: true,
-        width: 400,
+        width: 357,
         height: 600,
         type: 'popup',
         url: 'popup.html',
@@ -150,7 +150,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     chrome.windows.create(
       {
         focused: true,
-        width: 400,
+        width: 357,
         height: 600,
         type: 'popup',
         url: 'popup.html',

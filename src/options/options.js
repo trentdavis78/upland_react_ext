@@ -66,6 +66,18 @@ const OptionsPage = (props) => {
       ) {
         callback()
         clearInterval(intervalID)
+        chrome.windows.create(
+          {
+            focused: true,
+            width: 357,
+            height: 600,
+            type: 'popup',
+            url: 'popup.html',
+            top: 0,
+            left: 0,
+          },
+          () => {}
+        )
       }
     }, 1000)
   }
