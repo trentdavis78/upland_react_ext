@@ -9,8 +9,6 @@
     "128": "icon.png"
   },
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Upland Extension",
     "default_icon": "icon.png"
   },
   "permissions": ["storage", "tabs", "webNavigation", "webRequest", "scripting"],

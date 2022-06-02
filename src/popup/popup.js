@@ -71,8 +71,9 @@ const App = (props) => {
     <div
       style={{
         overflow: 'hidden',
-        width: '357px',
-        height: '600px',
+        // width: '357px',
+        // height: '600px',
+        height: '100vh',
         backgroundImage: 'url("assets/popup_background.svg")',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

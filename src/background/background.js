@@ -131,7 +131,50 @@ async function retryOnTabUpdate(tabId, info, tab) {
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.type == 'SIGN_TX_SUBDIVIDE') console.log('SUBDIVIDE')
+  if (request.type == 'SIGN_TX_SUBDIVIDE') {
+    console.log(request.options.message)
+    chrome.windows.create(
+      {
+        focused: true,
+        width: 400,
+        height: 600,
+        type: 'popup',
+        url: 'popup.html',
+        top: 0,
+        left: 0,
+      },
+      () => {}
+    )
+  } else if (request.type == 'SIGN_TX_FURNISH') {
+    console.log(request.options.message)
+    chrome.windows.create(
+      {
+        focused: true,
+        width: 400,
+        height: 600,
+        type: 'popup',
+        url: 'popup.html',
+        top: 0,
+        left: 0,
+      },
+      () => {}
+    )
+  }
 
   sendResponse()
+})
+
+chrome.action.onClicked.addListener(() => {
+  chrome.windows.create(
+    {
+      focused: true,
+      width: 357,
+      height: 600,
+      type: 'popup',
+      url: 'popup.html',
+      top: 0,
+      left: 0,
+    },
+    () => {}
+  )
 })

@@ -58,15 +58,26 @@ export const showManageButtons = (
         cursor: !canBeDivided ? 'pointer' : 'not-allowed',
       }
 
-      const signTX = () => {
-        chrome.runtime.sendMessage({
-          type: 'SIGN_TX_SUBDIVIDE',
-          options: {
-            type: 'basic',
-            title: 'Test',
-            message: 'Test',
-          },
-        })
+      const signTX = (alt) => {
+        if (alt === 'Furnish') {
+          chrome.runtime.sendMessage({
+            type: 'SIGN_TX_FURNISH',
+            options: {
+              type: 'basic',
+              title: 'Test',
+              message: 'FURNISH',
+            },
+          })
+        } else if (alt === 'Sub-Divide') {
+          chrome.runtime.sendMessage({
+            type: 'SIGN_TX_SUBDIVIDE',
+            options: {
+              type: 'basic',
+              title: 'Test',
+              message: 'SUBDIVIDE',
+            },
+          })
+        }
       }
 
       const FurnishModalText = () => {
@@ -142,7 +153,9 @@ export const showManageButtons = (
             title={buttonAttrbs.alt}
             open={open}
             handleClose={handleClose}
-            signTX={signTX}
+            signTX={() => {
+              signTX(buttonAttrbs.alt)
+            }}
           >
             {buttonAttrbs.alt == 'Furnish' ? (
               <FurnishModalText />
