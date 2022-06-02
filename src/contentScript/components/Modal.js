@@ -16,12 +16,11 @@ export default function Modal({ open, handleClose }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Hi! I'm the omnipotent popup window!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            We think you should go fuck yourself. Do you agree?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
