@@ -79,13 +79,17 @@ export const showManageButtons = (
               You are about to divide your property
             </Typography>
             <Typography
-              style={{ color: '#005cff' }}
+              style={{ color: '#005cff', textAlign: 'center' }}
               variant="body1"
               gutterBottom
             >
               <b>{currFullAddress}</b>
             </Typography>
-            <Typography variant="body1" gutterBottom>
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ textAlign: 'center' }}
+            >
               Into{' '}
               <Typography
                 style={{ color: '#005cff' }}
@@ -96,8 +100,23 @@ export const showManageButtons = (
                   {currSparkHrs == 30 ? '8 ' : currSparkHrs == 20 ? '3 ' : '1 '}
                   - 1 BR
                 </b>
-              </Typography>
+              </Typography>{' '}
               units
+            </Typography>
+            <Typography
+              style={{
+                color: 'red',
+                marginBottom: 0,
+                marginTop: 10,
+                textAlign: 'center',
+              }}
+              variant="h6"
+              gutterBottom
+              component="div"
+            >
+              <b>CONFIRM</b>
+              <br />
+              Cannot be undone
             </Typography>
           </>
         )

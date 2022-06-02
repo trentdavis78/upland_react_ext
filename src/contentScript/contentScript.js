@@ -13,10 +13,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === 'PROPERTY_MODEL') {
     switch (currCityID) {
       case 1:
-        currFullAddress += ' , CA'
+        currFullAddress += ', CA'
         break
       case 3:
-        currFullAddress += ' , NY'
+        currFullAddress += ', NY'
         break
       default:
         break
