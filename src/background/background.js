@@ -52,8 +52,6 @@ function requestHandler(req) {
     chrome.tabs.sendMessage(req.tabId, { message: 'API_PROPERTIES' }, (res) => {
       if (!chrome.runtime.lastError) {
         console.log(res)
-      } else {
-        console.error(chrome.runtime.lastError)
       }
     })
   } else if (
@@ -64,8 +62,6 @@ function requestHandler(req) {
     chrome.tabs.sendMessage(req.tabId, { message: 'PROPERTY_MODEL' }, (res) => {
       if (!chrome.runtime.lastError) {
         console.log(res)
-      } else {
-        console.error(chrome.runtime.lastError)
       }
     })
   } else {
