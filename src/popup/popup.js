@@ -56,6 +56,10 @@ const App = (props) => {
   }, [loading])
 
   const openOptions = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      console.log(tabs[0])
+      chrome.tabs.remove(tabs[0].id)
+    })
     chrome.runtime.openOptionsPage()
   }
 
