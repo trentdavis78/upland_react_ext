@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import Modal from '../components/Modal'
 import { manageModal, manageButton } from './htmlFiles'
-import { checkSubDivide } from '../../utils/api'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { checkSubDivide, getUserFromApp, subDivide, sendStructureToContainer} from '../../utils/api'
+import { TestContainerID } from '../../utils/config_wax'
 
 export const showManageButtons = (
   currOwner,
@@ -69,6 +70,25 @@ export const showManageButtons = (
             },
           })
         } else if (alt === 'Sub-Divide') {
+
+          getUserFromApp(myEOSID).then((res) => {
+            if (res !== null){
+                const token = res.accessToken
+                subDivide(currPropModelID,myEOSID).then(
+                  (res) => {
+                    if(res){
+                      sendStructureToContainer(TestContainerID,currPropModelID,token).then(
+                        (res) => {
+                            console.log(res)
+                        }
+                      )
+                    }
+                  }
+                )
+            }
+
+        })
+
           chrome.runtime.sendMessage({
             type: 'SIGN_TX_SUBDIVIDE',
             options: {
