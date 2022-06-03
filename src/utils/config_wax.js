@@ -26,3 +26,6 @@ export const WAX_BASE_ENDPOINT_HOST = var_WAX_BASE_ENDPOINT_HOST
 export const COLLECTION_NAME = var_COLLECTION_NAME
 export const TESTNET = IS_TESTNET
 export const ATOMIC_ASSET_URL = 'https://wax.atomichub.io/explorer/asset/'
+
+
+export const TestContainerID = '437'
