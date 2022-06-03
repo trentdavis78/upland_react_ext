@@ -6,21 +6,38 @@ export const fetchData = async (url) => {
 }
 
 export const checkSubDivide = (propNFTID) => {
-  const sampleNFTID = 3831
+  // const sampleNFTID = '30271'
+  const eosid = sessionStorage.getItem('eos_id')
+  const url = 'https://7bf4-2003-f8-973e-2100-3893-68b1-83a7-16bc.eu.ngrok.io/upland/structure/isdivided'
   return new Promise((resolve, reject) => {
+    
     axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .post(url, {eosId:eosid,structureId:propNFTID})
       .then((res) => {
-        if (propNFTID === sampleNFTID) {
-          res.data.matches = true
-        } else {
-          res.data.matches = false
-        }
-
+        console.log("Property NFTID:", propNFTID)
+        console.log("Is Divided NFTID:",res.data)
         resolve(res.data)
       })
       .catch((err) => reject(err))
   })
+
+
+  // return new Promise((resolve, reject) => {
+    
+  //   axios
+  //     .post('https://api.coindesk.com/v1/bpi/currentprice.json', {eosId:eosid,structureId:sampleNFTID})
+  //     .then((res) => {
+  //       if (propNFTID === sampleNFTID) {
+  //         res.data.matches = true
+  //       } else {
+  //         res.data.matches = false
+  //       }
+
+  //       resolve(res.data)
+  //     })
+  //     .catch((err) => reject(err))
+  // })
+
 }
 
 export const fetchUpxAmt = () => {
