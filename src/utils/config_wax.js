@@ -1,4 +1,4 @@
-let IS_TESTNET = false
+let IS_TESTNET = true
 
 var var_WAX_BASE_ENDPOINT = 'https://api.wax.alohaeos.com'
 var var_WAX_BASE_ENDPOINT_HOST = 'api.wax.alohaeos.com'
