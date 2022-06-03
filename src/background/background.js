@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime'
 import { Anchor } from 'ual-anchor'
 import { UALProvider, withUAL } from 'ual-reactjs-renderer'
 import { WAX_CHAIN_ID, WAX_BASE_ENDPOINT_HOST } from '../utils/config_wax'
+import {getUserFromApp} from '../utils/api'
 
 import React from 'react'
 
@@ -162,6 +163,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 
   sendResponse()
+  }
 })
 
 chrome.action.onClicked.addListener(() => {
