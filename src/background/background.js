@@ -4,9 +4,14 @@ import 'regenerator-runtime/runtime'
 import { Anchor } from 'ual-anchor'
 import { UALProvider, withUAL } from 'ual-reactjs-renderer'
 import { WAX_CHAIN_ID, WAX_BASE_ENDPOINT_HOST } from '../utils/config_wax'
-import {getUserFromApp} from '../utils/api'
+import { getUserFromApp } from '../utils/api'
+import { getProperties } from '../utils/api'
 
 import React from 'react'
+
+chrome.runtime.onInstalled.addListener((details) => {
+  console.log(getProperties())
+})
 
 function UALProviderComponent({ children }) {
   const appName = 'MetaForceComics.io'
@@ -133,7 +138,6 @@ async function retryOnTabUpdate(tabId, info, tab) {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type == 'SIGN_TX_SUBDIVIDE') {
-<<<<<<< HEAD
     console.log(request.options.message)
     chrome.windows.create(
       {
@@ -164,14 +168,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 
   sendResponse()
-=======
-    console.log('SUBDIVIDE')
-    // getUserFromApp(request.options.eosId).then((res) => {
-    //   console.log(res)
-    // })
-    sendResponse()
-  }
->>>>>>> 665b5ea4283b0991a8398f13ce924ce45227f359
 })
 
 chrome.action.onClicked.addListener(() => {

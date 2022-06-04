@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import Modal from '../components/Modal'
 import { manageModal, manageButton } from './htmlFiles'
-import { checkSubDivide, getUserFromApp, subDivide, sendStructureToContainer} from '../../utils/api'
+import {
+  checkSubDivide,
+  getUserFromApp,
+  subDivide,
+  sendStructureToContainer,
+} from '../../utils/api'
 import { TestContainerID } from '../../utils/config_wax'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -30,7 +35,7 @@ export const showManageButtons = (
       useEffect(() => {
         checkSubDivide(currPropModelID)
           .then((res) => {
-            console.log("Is Divided NFTID:",res.data)
+            console.log('Is Divided NFTID:', res.data)
             setCanBeDivided(res)
             console.log(`CanbeDivided is set to ${canBeDivided}`)
           })
@@ -60,47 +65,24 @@ export const showManageButtons = (
         cursor: !canBeDivided ? 'pointer' : 'not-allowed',
       }
 
-<<<<<<< HEAD
-      const signTX = (alt) => {
-        if (alt === 'Furnish') {
-          chrome.runtime.sendMessage({
-            type: 'SIGN_TX_FURNISH',
-            options: {
-              type: 'basic',
-              title: 'Test',
-              message: 'FURNISH',
-            },
-          })
-        } else if (alt === 'Sub-Divide') {
-          chrome.runtime.sendMessage({
-            type: 'SIGN_TX_SUBDIVIDE',
-            options: {
-              type: 'basic',
-              title: 'Test',
-              message: 'SUBDIVIDE',
-            },
-          })
-        }
-=======
       const signTX = () => {
-      //  const wax = localStorage.getItem('wax_id')
-      //  console.log('WAXI', wax)
+        //  const wax = localStorage.getItem('wax_id')
+        //  console.log('WAXI', wax)
         getUserFromApp(myEOSID).then((res) => {
-            if (res !== null){
-                const token = res.accessToken
-                subDivide(currPropModelID,myEOSID).then(
-                  (res) => {
-                    if(res){
-                      sendStructureToContainer(TestContainerID,currPropModelID,token).then(
-                        (res) => {
-                            console.log(res)
-                        }
-                      )
-                    }
-                  }
-                )
-            }
-
+          if (res !== null) {
+            const token = res.accessToken
+            subDivide(currPropModelID, myEOSID).then((res) => {
+              if (res) {
+                sendStructureToContainer(
+                  TestContainerID,
+                  currPropModelID,
+                  token
+                ).then((res) => {
+                  console.log(res)
+                })
+              }
+            })
+          }
         })
 
         chrome.runtime.sendMessage({
@@ -109,10 +91,9 @@ export const showManageButtons = (
             type: 'basic',
             title: 'Test',
             message: 'Test',
-            eosId: myEOSID
+            eosId: myEOSID,
           },
         })
->>>>>>> 665b5ea4283b0991a8398f13ce924ce45227f359
       }
 
       const FurnishModalText = () => {
