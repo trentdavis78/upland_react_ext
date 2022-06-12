@@ -30,7 +30,7 @@ export const showManageButtons = (
       useEffect(() => {
         checkSubDivide(currPropModelID)
           .then((res) => {
-            setCanBeDivided(res.matches)
+            setCanBeDivided(res)
             console.log(`CanbeDivided is set to ${canBeDivided}`)
           })
           .catch((err) => console.log(err.response))
